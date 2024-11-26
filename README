@@ -1,17 +1,14 @@
-### My Methodology
+My Methodology
 
-```
 Host Discovery (External)
 ━━━━━━━━━━━━━━━━━━━━━━━━━
 fping -ag 10.10.110.0/24 2>/dev/null | tee external-ips ; \
 for ip in $(cat external-ips); do nmap=$(nmap -p- --max-retries 1 --min-rate 10000 --open "$ip" | grep -vE 'Warning:|filtered|latency|Starting'); echo "$nmap"; ports=$(echo "$nmap" | sed -n 's|/.*||p' | paste -sd ','); echo "nmap -sC -sV -Pn -p$ports $ip"; echo; done
-```
 
 Host Discovery (Internal)
 ━━━━━━━━━━━━━━━━━━━━━━━━━
 fping -ag 172.16.1.0/24 2>/dev/null | tee internal-ips ; \
 for ip in $(cat internal-ips); do nmap=$(nmap -p- --max-retries 1 --min-rate 10000 --open "$ip" | grep -vE 'Warning:|filtered|latency|Starting'); echo "$nmap"; ports=$(echo "$nmap" | sed -n 's|/.*||p' | paste -sd ','); echo "nmap -sC -sV -Pn -p$ports $ip"; echo; done
-
 
 Service Enumeration
 ━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -31,7 +28,6 @@ for x in $(showmount -e 172.16.1.10 | awk '{print $1}' | grep -v 'Export')
     sudo mount -t nfs 172.16.1.10:"$x" "/dev/shm"/mnt"$x" -o nolock
     tree -puga "/dev/shm"/mnt"$x"
 done
-
 
 Web Enumeration
 ━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -58,8 +54,6 @@ ffuf -u 'http://10.10.110.100/nav.php?page=FUZZ' -t 400 -rate 10000 -v -mc 200 \
 gobuster vhost --append-domain -u example.com -k -r -t200 -q \
 -w /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt \
 | grep -oP '(?<=Found: )[^ ]+'
-
-
 
 Exploitation
 ━━━━━━━━━━━━━━━━━━━━━━━━━
