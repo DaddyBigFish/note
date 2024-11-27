@@ -39,8 +39,8 @@ My Methodology
 
 <details>
     <summary>Web Enumeration</summary>
+    **Technology Discovery**
     
-    [*] Technology Discovery
     whatweb http://10.10.110.100
     
     [*] WordPress Discovery
