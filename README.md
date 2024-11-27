@@ -40,23 +40,28 @@
 <details>
     <summary><h4>Web Enumeration</h4></summary>
 
-    [*] Technology Discovery
+   <h3>Technology Discovery</h3>
+   
     whatweb http://10.10.110.100
     
-    [*] WordPress Discovery
+   <h3>WordPress Discovery</h3>
+   
     wpscan --url http://10.10.110.100/wordpress --enumerate
     
-    [*] Directory Discovery
+   <h3>Directory Discovery</h3>
+
     ffuf -u 'http://10.10.110.100/FUZZ' -t 400 -rate 10000 -e .php -v -recursion -mc 200,301 \
     -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt \
     2>/dev/null | grep -oP '(http.*)(?<!/)$'
     
-    [*] Directory Traversal
+<h3>Directory Traversal</h3>
+
     ffuf -u 'http://10.10.110.100/nav.php?page=FUZZ' -t 400 -rate 10000 -v -mc 200 \
     -w /usr/share/seclists/Fuzzing/LFI/LFI-Jhaddix.txt \
     2>/dev/null | grep -oP '(http.*)(?<!/)$'
     
-    [*] XSS + SSTI
+   <h3>XSS + SSTI</h3>
+   
     <img src=x>'"${{7*7}}
     
    <h3>Subdomain Discovery</h3>
