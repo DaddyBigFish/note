@@ -4,7 +4,6 @@ My Methodology
 
 <details>
     <summary>Host Discovery (External)</summary>
-    ```
     ━━━━━━━━━━━━━━━━━━━━━━━━━
     ```
     fping -ag 10.10.110.0/24 2>/dev/null | tee external-ips ; \
