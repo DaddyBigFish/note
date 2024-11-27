@@ -39,7 +39,7 @@ My Methodology
 
 <details>
     <summary>Web Enumeration</summary>
-    **Technology Discovery**
+    ## _formatted_ **Technology Discovery** with [a](link)
     
     whatweb http://10.10.110.100
     
