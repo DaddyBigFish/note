@@ -39,11 +39,12 @@ My Methodology
 
 <details>
     <summary>Web Enumeration</summary><p>
-    <h3>Technology Discovery</h3>
-    
+    <h5>Technology Discovery</h5>
+        
     whatweb http://10.10.110.100
+
+    <h5>WordPress Discovery</h5>
     
-    [*] WordPress Discovery
     wpscan --url http://10.10.110.100/wordpress --enumerate
     
     [*] Directory Discovery
