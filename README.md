@@ -43,6 +43,10 @@
    <h5>Technology Discovery</h5>
    
     whatweb http://10.10.110.100
+
+   <h5>WAF Discovery</h5>
+   
+    wafw00f http://10.10.110.100
     
    <h5>WordPress Discovery</h5>
    
