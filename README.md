@@ -38,13 +38,12 @@ My Methodology
 </details>
 
 <details>
-    <summary>Web Enumeration</summary><p>
-    <h5>Technology Discovery</h5>
-        
+    <summary><h4>Web Enumeration</h4></summary>
+    
+    [*] Technology Discovery       
     whatweb http://10.10.110.100
 
-    <h5>WordPress Discovery</h5>
-    
+    [*] WordPress Discovery
     wpscan --url http://10.10.110.100/wordpress --enumerate
     
     [*] Directory Discovery
@@ -64,7 +63,7 @@ My Methodology
     gobuster vhost --append-domain -u example.com -k -r -t200 -q \
     -w /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt \
     | grep -oP '(?<=Found: )[^ ]+'
-</p></details>
+</details>
 
 <details>
     <summary>Exploitation</summary>
