@@ -41,31 +41,26 @@
     <summary><h4>Web Enumeration</h4></summary>
 
     [*] Technology Discovery
-    ━━━━━━━━━━━━━━━━━━━━━━━━━
     whatweb http://10.10.110.100
     
     [*] WordPress Discovery
-    ━━━━━━━━━━━━━━━━━━━━━━━━━
     wpscan --url http://10.10.110.100/wordpress --enumerate
     
     [*] Directory Discovery
-    ━━━━━━━━━━━━━━━━━━━━━━━━━
     ffuf -u 'http://10.10.110.100/FUZZ' -t 400 -rate 10000 -e .php -v -recursion -mc 200,301 \
     -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt \
     2>/dev/null | grep -oP '(http.*)(?<!/)$'
     
     [*] Directory Traversal
-    ━━━━━━━━━━━━━━━━━━━━━━━━━
     ffuf -u 'http://10.10.110.100/nav.php?page=FUZZ' -t 400 -rate 10000 -v -mc 200 \
     -w /usr/share/seclists/Fuzzing/LFI/LFI-Jhaddix.txt \
     2>/dev/null | grep -oP '(http.*)(?<!/)$'
     
     [*] XSS + SSTI
-    ━━━━━━━━━━━━━━━━━━━━━━━━━
     <img src=x>'"${{7*7}}
     
-    [*] Subdomain Discovery
-    ━━━━━━━━━━━━━━━━━━━━━━━━━
+   <h3>Subdomain Discovery</h3>
+   
     gobuster vhost --append-domain -u example.com -k -r -t200 -q \
     -w /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt \
     | grep -oP '(?<=Found: )[^ ]+'
