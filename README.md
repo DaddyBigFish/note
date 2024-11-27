@@ -9,11 +9,12 @@ My Methodology
     for ip in $(cat external-ips); do nmap=$(nmap -p- --max-retries 1 --min-rate 10000 --open "$ip" | grep -vE 'Warning:|filtered|latency|Starting'); echo "$nmap"; ports=$(echo "$nmap" | sed -n 's|/.*||p' | paste -sd ','); echo "nmap -sC -sV -Pn -p$ports $ip"; echo; done
 </details>
 
-Host Discovery (Internal)
-━━━━━━━━━━━━━━━━━━━━━━━━━
-fping -ag 172.16.1.0/24 2>/dev/null | tee internal-ips ; \
-for ip in $(cat internal-ips); do nmap=$(nmap -p- --max-retries 1 --min-rate 10000 --open "$ip" | grep -vE 'Warning:|filtered|latency|Starting'); echo "$nmap"; ports=$(echo "$nmap" | sed -n 's|/.*||p' | paste -sd ','); echo "nmap -sC -sV -Pn -p$ports $ip"; echo; done
-
+<details>
+    <summary>Host Discovery (Internal)</summary>
+    
+    fping -ag 172.16.1.0/24 2>/dev/null | tee internal-ips ; \
+    for ip in $(cat internal-ips); do nmap=$(nmap -p- --max-retries 1 --min-rate 10000 --open "$ip" | grep -vE 'Warning:|filtered|latency|Starting'); echo "$nmap"; ports=$(echo "$nmap" | sed -n 's|/.*||p' | paste -sd ','); echo "nmap -sC -sV -Pn -p$ports $ip"; echo; done
+</details>
 
 Service Enumeration
 ━━━━━━━━━━━━━━━━━━━━━━━━━
