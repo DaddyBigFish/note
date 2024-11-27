@@ -38,7 +38,7 @@ My Methodology
 </details>
 
 <details>
-    <summary><h4>Web Enumeration</h4></summary>
+    <summary><h3>Web Enumeration</h3></summary>
     
     [*] Technology Discovery       
     whatweb http://10.10.110.100
