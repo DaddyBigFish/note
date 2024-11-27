@@ -1,7 +1,8 @@
+
 My Methodology
 
 
-Host Discovery (External)
+<details>Host Discovery (External)</details>
 ━━━━━━━━━━━━━━━━━━━━━━━━━
 fping -ag 10.10.110.0/24 2>/dev/null | tee external-ips ; \
 for ip in $(cat external-ips); do nmap=$(nmap -p- --max-retries 1 --min-rate 10000 --open "$ip" | grep -vE 'Warning:|filtered|latency|Starting'); echo "$nmap"; ports=$(echo "$nmap" | sed -n 's|/.*||p' | paste -sd ','); echo "nmap -sC -sV -Pn -p$ports $ip"; echo; done
