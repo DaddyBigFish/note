@@ -3,21 +3,21 @@
 
 
 <details>
-    <summary><h4>Host Discovery (External)</h4></summary>
+    <summary><H5>Host Discovery (External)</H5></summary>
     
     fping -ag 10.10.110.0/24 2>/dev/null | tee external-ips ; \
     for ip in $(cat external-ips); do nmap=$(nmap -p- --max-retries 1 --min-rate 10000 --open "$ip" | grep -vE 'Warning:|filtered|latency|Starting'); echo "$nmap"; ports=$(echo "$nmap" | sed -n 's|/.*||p' | paste -sd ','); echo "nmap -sC -sV -Pn -p$ports $ip"; echo; done
 </details>
 
 <details>
-    <summary><h4>Host Discovery (Internal)</h4></summary>
+    <summary><H5>Host Discovery (Internal)</H5></summary>
     
     fping -ag 172.16.1.0/24 2>/dev/null | tee internal-ips ; \
     for ip in $(cat internal-ips); do nmap=$(nmap -p- --max-retries 1 --min-rate 10000 --open "$ip" | grep -vE 'Warning:|filtered|latency|Starting'); echo "$nmap"; ports=$(echo "$nmap" | sed -n 's|/.*||p' | paste -sd ','); echo "nmap -sC -sV -Pn -p$ports $ip"; echo; done
 </details>
 
 <details>
-    <summary><h4>Service Enumeration</h4></summary>
+    <summary><H5>Service Enumeration</H5></summary>
     
     nmap -Pn -sC -sV 172.16.1.10 -p22,80,139,445
     ldap=$(nmap --script "ldap* and not brute" -p 389 172.16.1.10); echo "$ldap"
@@ -38,7 +38,7 @@
 </details>
 
 <details>
-    <summary><h4>Web Enumeration</h4></summary>
+    <summary><H5>Web Enumeration</H5></summary>
 
    <h3>Technology Discovery</h3>
    
@@ -72,7 +72,7 @@
 </details>
 
 <details>
-    <summary><h4>Exploitation</h4></summary>
+    <summary><H5>Exploitation</H5></summary>
     
     [*] Reverse Shells
     <?php
@@ -97,7 +97,7 @@
 </details>
 
 <details>
-    <summary><h4>Post Exploitation</h4></summary>
+    <summary><H5>Post Exploitation</H5></summary>
     
     [*] Linux
     ssh user@xxxxxxxxx -i id_rsa -L 33060:localhost:33060
