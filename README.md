@@ -38,7 +38,7 @@ My Methodology
 </details>
 
 <details>
-    <summary>Web Enumeration</summary>
+    <summary>Web Enumeration</summary><p>
     ## _formatted_ **Technology Discovery** with [a](link)
     
     whatweb http://10.10.110.100
@@ -63,7 +63,7 @@ My Methodology
     gobuster vhost --append-domain -u example.com -k -r -t200 -q \
     -w /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt \
     | grep -oP '(?<=Found: )[^ ]+'
-</details>
+</p></details>
 
 <details>
     <summary>Exploitation</summary>
