@@ -1,6 +1,8 @@
 
 <h1>My Methodology</h1>
-<img>https://github.com/user-attachments/assets/fb6d2226-5477-4396-be41-e38d2a947be4</img>
+<picture>
+  <img src="https://github.com/user-attachments/assets/fb6d2226-5477-4396-be41-e38d2a947be4">
+</picture>
 
 
 <details>
