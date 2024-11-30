@@ -54,7 +54,7 @@
     .vintage.htb = VINTAGE.HTB
     vintage.htb = VINTAGE.HTB
     export KRB5CCNAME='/home/me/USERNAME@dc01@VINTAGE.HTB.ccache'
-    kinit -c /home/me/USERNAME@dc01@VINTAGE.HTB.ccache USERNAME@VINTAGE.HTB
+    kinit -c '/home/me/USERNAME@dc01@VINTAGE.HTB.ccache' 'USERNAME@VINTAGE.HTB'
     klist
     impacket-GetADUsers -dc-host dc01.vintage.htb -k vintage.htb/
     impacket-GetNPUsers -usersfile usernames domain/ -dc-ip 172.16.1.10
