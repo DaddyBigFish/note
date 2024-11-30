@@ -3,6 +3,29 @@
 <picture>
   <img src="https://github.com/user-attachments/assets/fb6d2226-5477-4396-be41-e38d2a947be4">
 </picture>
+<table>
+  <tr>
+    <td><button onclick="document.getElementById('London').style.display='block';document.getElementById('Paris').style.display='none';document.getElementById('Tokyo').style.display='none';">London</button></td>
+    <td><button onclick="document.getElementById('London').style.display='none';document.getElementById('Paris').style.display='block';document.getElementById('Tokyo').style.display='none';">Paris</button></td>
+    <td><button onclick="document.getElementById('London').style.display='none';document.getElementById('Paris').style.display='none';document.getElementById('Tokyo').style.display='block';">Tokyo</button></td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div id="London" style="display:none;">
+        <h3>London</h3>
+        <p>London is the capital city of England.</p>
+      </div>
+      <div id="Paris" style="display:none;">
+        <h3>Paris</h3>
+        <p>Paris is the capital of France.</p>
+      </div>
+      <div id="Tokyo" style="display:none;">
+        <h3>Tokyo</h3>
+        <p>Tokyo is the capital of Japan.</p>
+      </div>
+    </td>
+  </tr>
+</table>
 
 
 <details>
