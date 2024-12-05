@@ -3,3 +3,4 @@
 ![image](https://github.com/user-attachments/assets/5fecbf67-1d52-4d74-8b49-db04af7e5a57)
 ![image](https://github.com/user-attachments/assets/3cc23c15-6824-4864-a91b-69f6981fd67d)
 ![image](https://github.com/user-attachments/assets/f4f88e28-7ba3-49ea-b9aa-aae70afd6255)
+![pentest_ad_dark_2023_02](https://github.com/user-attachments/assets/cee4f26d-91a2-4d0a-9757-5b6b2a9a0473)
